@@ -84,23 +84,22 @@ class NearestNeighbor:
         
         print(f"{k_folds}-Fold Cross Validation Accuracy: {avr_accuracy:.2f} (+/- {std_accuracy:.2f})")
         return avr_accuracy, std_accuracy
-        
-        
 
-
+# Example with MNIST DATASET
 import mnist
 dataset = mnist.DATASET_MNIST()
 classifier = NearestNeighbor()
 classifier.train(dataset.train_images, dataset.train_labels)
 classifier.k_fold_cross_validation()
-# pred = classifier.predict(dataset.test_images)
-# classifier.print_result(dataset.test_labels)
+pred = classifier.predict(dataset.test_images)
+classifier.print_result(dataset.test_labels)
 
-# import cifar10
-# dataset = cifar10.DATASET_CIFAR10()
-# classifier = NearestNeighbor()
-# classifier.train(dataset.train_images, dataset.train_labels)
-# pred = classifier.predict(dataset.test_images)
-# classifier.print_result(dataset.test_labels)
+# Example with CIFAR10 DATASET
+import cifar10
+dataset = cifar10.DATASET_CIFAR10()
+classifier = NearestNeighbor()
+classifier.train(dataset.train_images, dataset.train_labels)
+pred = classifier.predict(dataset.test_images)
+classifier.print_result(dataset.test_labels)
 
     
