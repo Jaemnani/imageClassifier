@@ -50,21 +50,57 @@ class NearestNeighbor:
             print("Correct Ratio : ", result_percentage)
         else:
             print("Predict First.")
-
-
             
+    def k_fold_cross_validation(self, k_folds=5):
+        if self.x_train.__class__ == None.__class__ or self.y_train.__class__ == None.__class__:
+            print("Set Training data, first.")
+            return -1
+        x = self.x_train.copy()
+        y = self.y_train.copy()
+        fold_size = len(x) // k_folds
+        indices = np.arange(len(x))
+        np.random.shuffle(indices)
+        
+        accuracies = []
+        
+        for fold in range(k_folds):
+            start = fold * fold_size
+            end = (fold + 1) * fold_size
+            
+            valid_idx = indices[start:end]
+            train_idx = np.concatenate((indices[:start], indices[end:]))
+            
+            x_train, x_valid = x[train_idx], x[valid_idx]
+            y_train, y_valid = y[train_idx], y[valid_idx]
+            
+            self.train(x_train, y_train)
+            y_pred = self.predict(x_valid)
+            accuracy = np.sum(y_valid == y_pred) / len(y_valid) * 100.
+            accuracies.append(accuracy)
+            print(f"Fold {fold + 1}/{k_folds}, Accuracy: {accuracy:.2f}")
+
+        avr_accuracy = np.mean(accuracies)
+        std_accuracy = np.std(accuracies)
+        
+        print(f"{k_folds}-Fold Cross Validation Accuracy: {avr_accuracy:.2f} (+/- {std_accuracy:.2f})")
+        return avr_accuracy, std_accuracy
+        
+        
+
+
 import mnist
 dataset = mnist.DATASET_MNIST()
 classifier = NearestNeighbor()
 classifier.train(dataset.train_images, dataset.train_labels)
-pred = classifier.predict(dataset.test_images)
-classifier.print_result(dataset.test_labels)
+classifier.k_fold_cross_validation()
+# pred = classifier.predict(dataset.test_images)
+# classifier.print_result(dataset.test_labels)
 
-import cifar10
-dataset = cifar10.DATASET_CIFAR10()
-classifier = NearestNeighbor()
-classifier.train(dataset.train_images, dataset.train_labels)
-pred = classifier.predict(dataset.test_images)
-classifier.print_result(dataset.test_labels)
+# import cifar10
+# dataset = cifar10.DATASET_CIFAR10()
+# classifier = NearestNeighbor()
+# classifier.train(dataset.train_images, dataset.train_labels)
+# pred = classifier.predict(dataset.test_images)
+# classifier.print_result(dataset.test_labels)
 
     
