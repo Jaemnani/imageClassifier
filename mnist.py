@@ -45,11 +45,11 @@ class DATASET_MNIST:
             
             return labels
         
-tmp = DATASET_MNIST()
-print(f'Train images shape: {tmp.train_images.shape}')
-print(f'Train labels shape: {tmp.train_labels.shape}')
-print(f'Test images shape:  {tmp.test_images.shape}')
-print(f'Test labels shape:  {tmp.test_labels.shape}')
+# tmp = DATASET_MNIST()
+# print(f'Train images shape: {tmp.train_images.shape}')
+# print(f'Train labels shape: {tmp.train_labels.shape}')
+# print(f'Test images shape:  {tmp.test_images.shape}')
+# print(f'Test labels shape:  {tmp.test_labels.shape}')
         
 # def load_mnist_images(filename):
 #     with open(filename, 'rb') as f:

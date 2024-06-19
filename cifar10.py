@@ -46,11 +46,11 @@ class DATASET_CIFAR10:
         
         return train_images, train_labels, test_images, test_labels        
 
-tmp = DATASET_CIFAR10()
-print(f'Train images shape: {tmp.train_images.shape}')
-print(f'Train labels shape: {tmp.train_labels.shape}')
-print(f'Test  images shape: {tmp.test_images.shape}')
-print(f'Test  labels shape: {tmp.test_labels.shape}')
+# tmp = DATASET_CIFAR10()
+# print(f'Train images shape: {tmp.train_images.shape}')
+# print(f'Train labels shape: {tmp.train_labels.shape}')
+# print(f'Test  images shape: {tmp.test_images.shape}')
+# print(f'Test  labels shape: {tmp.test_labels.shape}')
 
 
 # def load_cifar10_batch(filename):
